@@ -1,0 +1,112 @@
+\section{Многочлены от операторов и матриц}
+Далее будем рассматривать следующие алгебры: $L(X)$, $\matr{n}$,
+$\polyset{}$.
+
+Пусть $A \in L(X)$, $p \in \polyset{}$.
+\[ p(z) = p_0 + p_1 z + \dotsb + p_m z^m \]
+
+Поставим $p$ в соответствие такой оператор $p(A)$, что
+\[ p(A) = p_0 I + p_1 A + \dotsb + p_m A^m \]
+
+\begin{definition}
+    Оператор $p(A)$ называется \emph{многочленом от оператора} $A$.
+\end{definition}
+
+Рассмотрим отображение $ \Phi_A : \polyset{} \to L(X) $ такое что
+\begin{equation}\label{eq:operatorpolynomial}
+    \Phi_A(p) = p(A) 
+\end{equation}
+
+\begin{lemma}
+    Отображение \eqref{eq:operatorpolynomial} — гомоморфизм алгебр:
+    \begin{enumerate}
+        \item $\Phi_A(\mathbbm{1}) = I$, где $\mathbbm{1}(z) \equiv 1$
+        \item $\Phi_A(\alpha f + \beta g) = \alpha \Phi_A(f) + \beta \Phi_A(g)$
+        \item $\Phi_A(fg) = \Phi_A(f) \Phi_A(g)$
+    \end{enumerate}
+\end{lemma}
+
+\begin{proofbreak}
+    \NoEndMark
+    \dindent Утверждения (1) и (2) очевидны. Докажем утверждение (3).
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item $
+            \begin{gathered}[t]
+                \begin{aligned}[t]
+                    f(z) &= f_0 + f_1 z + \dotsb + f_m z^m \\
+                    g(z) &= g_0 + g_1 z + \dotsb + g_k z^k \\
+                    (fg)(z) &= \sum_{i=0}^{m+k} c_i z^i, & c_i = \sum_{j+p=i} f_j
+                        g_p \\
+                    \Phi_A(fg) &= \sum_{i=0}^{m+k} c_i A^i
+                \end{aligned} \\
+                \begin{multlined}
+                    \Phi_A(f) \Phi_A(g) = f(A)g(A) = (f_0 I + f_1 A + \dotsb 
+                        + f_m A^m) \times \\ \times (g_0 I + g_1 A
+                        + \dotsb + g_k A^k) = \sum_{i=0}^{m+k} c_i A^i, \quad c_i =
+                        \sum_{j+p=i} f_j g_p
+                \end{multlined} \\
+                \Phi_A(fg) = \Phi_A(f) \Phi_A(g) \qquad\square
+            \end{gathered} $
+    \end{enumerate}
+\end{proofbreak}
+
+\begin{corollaryle}
+    $ f(A) g(A) = g(A) f(A) $
+\end{corollaryle}
+
+\begin{proof}
+    \[ \Phi_A(f) \Phi_A(g) = \Phi_A(fg) = \Phi_A(gf) = \Phi_A(g) \Phi_A(f) \] 
+\end{proof}
+
+Аналогично можно рассмотреть многочлены от матриц (и вообще элементов любой
+унитарной алгебры).
+
+Несложно заметить, что многочлен $p(\mathcal{A})$ от матрицы $\mathcal{A}$ 
+оператора $A$ есть матрица многочлена $p(A)$ от оператора $A$.
+
+Рассмотрим оператор $A\in L(X)$ такой, что
+\begin{align*}
+    I &= I_1 \oplus \dotsb \oplus I_m \\
+    A &= A_1 \oplus \dotsb \oplus A_m \\
+    \intertext{относительно}
+    X &= X_1 \oplus \dotsb \oplus X_m
+\end{align*}
+
+Очевидно, что если $X_k$ инвариантно относительно $A$, то оно инвариантно также
+относительно $A^j, \; j \geq 0$. Также ясно, что если $A_k$~— сужение оператора
+$A$ на инвариантное подпространство $X_k$, то $A_k^j$ — сужение оператора $A^j$
+на то же подпространство. Отсюда получаем, что
+\[ A^j = A_1^j \oplus \dotsb \oplus A_m^j \]
+
+Пусть далее $A$ — оператор простой структуры, $f\in \polyset{}$.
+\begin{align*}
+    A &= \sum_{j=1}^m \lambda_j P_j \\
+    A^k &= \sum_{j=1}^m \lambda_j^k P_j \\
+    f(A) &= \sum_{j=1}^m f(\lambda_j) P_j
+\end{align*}
+
+Последние два равенства доказываются простой проверкой.
+
+Наша цель — получить из последнего равенства проекторы $P_j$. Этого можно
+добиться, если найти такие многочлены $f_j$, что
+\[
+\left\{\begin{array}{l l}
+    f_j(\lambda_j) = 1 \\
+    f_j(\lambda_k) = 0, & k \neq j
+\end{array}\right.
+\]
+
+Тогда $f_j(A) = P_j$.
+
+Используем интерполяционную формулу Лагранжа:
+\begin{gather}
+    f_j(\lambda) = \prod_{\substack{i = 0 \\ i \neq j}}^m \frac{\lambda -
+        \lambda_i}{\lambda_j - \lambda_i} \nonumber \\ 
+    A = \sum_{j=1}^m \lambda_j P_j = \sum_{j=1}^m \lambda_j f_j(A) =
+    \sum_{j=1}^m \lambda_j \prod_{\substack{i = 0 \\ i \neq j}}^m \frac{A -
+    \lambda_i}{\lambda_j - \lambda_i} \label{eq:sylvester}
+\end{gather}
+
+Формула \eqref{eq:sylvester} называется \emph{интерполяционной формулой
+Сильвестра}.

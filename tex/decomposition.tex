@@ -1,0 +1,262 @@
+\section{Многочлены от операторов и разложение операторов}
+\begin{lemma} \label{le:noninvertibledevcomposition}
+    Любой необратимый оператор $A\in L(X)$ представим в виде прямой суммы
+    нильпотентного (нулевого) и обратимого операторов относительно некоторого
+    разложения в прямую сумму инвариантных подпространств.
+\end{lemma}
+
+\begin{proof}
+    Имеют место включения:
+    \begin{alignat*}{3}
+        \menge{0} & \neq \ker A &&\subset \ker A^2 &&\subset \dotsb \\
+        X & \supset \im A &&\supset \im A^2 &&\supset \dotsb
+    \end{alignat*}
+
+    В силу конечномерности пространства\footnote{Если $M$, $N$ — подпространства из $X$,
+    то условия $M \neq N$ и $M \subset N$ влекут за собой, что $\dim M < \dim N$} 
+    существует такое $k \in \mathbb{N}$, что $\ker A^k = \ker A^{k+1}$.
+
+    Покажем, что $\forall j \geq k+1 \; \ker A^k = \ker A^j$.
+    
+    Пусть $k$ — наименьшее натуральное число, для которого $\ker A^k = \ker
+    A^{k+1}$. Докажем, что $\ker A^{k+2} = \ker A^k$. Пусть $x \in \ker
+    A^{k+2}$.
+    \begin{multline*}
+        x \in \ker A^{k+2} \Rightarrow A^{k+2}x = 0 \Rightarrow A^{k+1}(Ax) = 0
+        \Rightarrow \\ \Rightarrow Ax \in \ker A^{k+1} = \ker A^{k} \Rightarrow
+        A^k(Ax) = 0 \Rightarrow A^{k+1}x = 0 \Rightarrow \\ \Rightarrow x \in \ker A^{k+1} =
+        \ker A^k
+    \end{multline*}
+
+    В силу теоремы о ранге и дефекте оператора,
+    \[ \dim X = \dim \ker A^j + \dim \im A^j \]
+    
+    И тогда, если $j \geq k$, то не только $\ker A^j = \ker A^k$, но и $\im A^j = \im A^k$.
+
+    Пусть $X_0 = \ker A^k$, $X_1 = \im A^k$. Нетрудно показать, что это инвариантные относительно $A$
+    подпространства.
+
+    Докажем, что $ X = X_0 \oplus X_1 $. Из теоремы о ранге и дефекте
+    \[ \dim X_0 + \dim X_1 = \dim X \]
+
+    Осталось показать, что $X_0 \cap X_1 = \menge{0}$.
+    \begin{multline*}
+        y \in X_0 \cap X_1 \Rightarrow (A^k y = 0) \wedge (\exists x \in X \; y =
+        A^k x) \Rightarrow \\ \Rightarrow A^k y = A^{2k}x  \Rightarrow A^{2k}x = 0
+        \Rightarrow x \in \ker A^{2k} = \ker A^k \Rightarrow \\ \Rightarrow A^k x = 0
+        \Rightarrow y = 0
+    \end{multline*}
+    
+    Таким образом $A = A_0 \oplus A_1$ относительно $X = X_0 \oplus X_1$.
+
+    $\ker A_1 = \menge{0}$, т. к. все векторы из ядра $A$ лежат в $X_0$, значит
+    $A_1$ обратим.
+
+    $\forall x \in X_0 \; A_0^k x = A^k x = 0$ — то есть $A$ нильпотентный либо
+    нулевой.
+\end{proof}
+
+\begin{lemma}
+    Многочлен $g\in \polyset{}$ аннулирует $A\in L(X)$ тогда и только тогда,
+    когда $g$ делится на минимальный многочлен $p_0$ оператора $A$.
+\end{lemma}
+
+\begin{proofbreak}
+    \dindent \textbf{Необходимость}.
+
+    Пусть $g(A) = O$, $g = f p_0 + r, \; \degr r < \degr p_0$.
+    \[ O = g(A) = f(A) p_0(A) + r(A) = r(A) \]
+
+    То есть $r(A) = O$, при этом степень $r$ меньше степени
+    минимального многочлена. Значит, $r = 0$.
+
+    \textbf{Достаточность}.
+    
+    Если $g = fp_0$, то $g(A) = f(A) p_0(A) = O$.
+\end{proofbreak}
+
+\begin{lemma}
+    Если $p \in \polyset[\fieldc]{}$ — минимальный многочлен для оператора $A$, то
+    $\spectrum{A}$ совпадает с множеством корней многочлена $p$.
+\end{lemma}
+
+\begin{proofbreak}
+    \begin{enumerate}
+        \item Пусть $\lambda_0 \in \spectrum{A}$, $p(z) = p_0 + p_1 z + \dotsb +
+            p_k z^k$. Тогда есть такой ненулевой вектор
+            $x_0$, что $Ax_0 = \lambda_0 x_0$.
+            \[ p(A)x_0 = p_0 x_0 + p_1 \lambda_0 x_0 + p_2 \lambda_0^2 x_0 +
+                \dotsb + p_k \lambda_0^k x_0 = p(\lambda_0) x_0 \]
+            
+            Таким образом
+            \[ 0 = p(A) x_0 = p(\lambda_0) x_0 \Rightarrow p(\lambda_0) = 0 \]
+
+        \item Пусть $\mu_0 \in \fieldc$ — корень $p$:
+            \[ p(\mu_0) = 0 \]
+
+            Предположим противное: $\mu_0 \notin \spectrum{A}$. Это значит, что
+            оператор $A - \mu_0 I$ обратим.
+
+            Рассмотрим многочлен $g(\lambda) = \frac{p(\lambda)}{\lambda-\mu_0}$.
+            \begin{align*}
+                p(\lambda) &= g(\lambda)(\lambda-\mu_0) \\
+                p(A) &= g(A)(A - \mu_0 I) \\
+                g(A) &= p(A)(A - \mu_0 I)^{-1} \\
+                g(A) &= O
+            \end{align*}
+
+            Таким образом получили, что $g$ — аннулирующий (ненулевой) многочлен, $\degr g <
+            \degr p$, что противоречит минимальности $p$.
+    \end{enumerate}
+\end{proofbreak}
+
+\begin{corollaryle}
+    $\spectrum{A}$ содержится в множестве корней любого аннулирующего многочлена
+    оператора $A$.
+\end{corollaryle}
+
+\begin{theorem}[о разложении оператора]\label{th:operatordecomposition}
+    Пусть $A \in L(X)$, $X$ — комплексное линейное пространство, $\spectrum{A} =
+    \menge{\lambda_1, \dotsc, \lambda_m}$, $k_i$~— алгебраическая кратность
+    собственного значения $\lambda_i, \; i = \overline{1,m}$.
+    Тогда оператор $A$ допускает разложение в прямую сумму операторов
+    \begin{equation}\label{eq:operatordecomposition}
+        A = \bigoplus_{k=1}^{m} A_k
+    \end{equation}
+    относительно инвариантных подпространств $X_1, \dotsc, X_m$:
+    \[ X = \bigoplus_{k=1}^m X_k \]
+
+    При этом справедливы следующие утверждения:
+    \begin{enumerate}
+        \item $ \spectrum{A_j} = \menge{\lambda_j}, \quad j = \overline{1,m} $
+        \item $ \dim X_j = k_j, \quad j = \overline{1,m} $
+        \item $ A_j = \lambda_j I_j + Q_j $, где $Q_j$ — нильпотентный (либо
+            нулевой) оператор с индексом нильпотентности $k_j^0 \leq k_j$,
+            $k_j^0$ — кратность корня $\lambda_j$ в минимальном многочлене
+            оператора $A$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим оператор $A - \lambda_j I, \; \lambda_j \in \spectrum{A}$. Он
+    необратим, значит к нему применима лемма
+    \ref{le:noninvertibledevcomposition}, то есть существует такое разложение
+    $X = X_j \oplus X_j'$ ($X_j$ и $X_j'$ инвариантны относительно $A -
+    \lambda_j I)$, что сужение этого
+    оператора на $X_j$ нильпотентно (индекс нильпотентности обозначим $m_j$), 
+    а на $X_j'$ — обратимо.
+
+    Несложно показать\footnote{$x \in X_j \Rightarrow (A-\lambda_j I)x = Ax -
+    \lambda_j x \in X_j \Rightarrow Ax \in X_j$},
+    что $X_j$ и $X_j'$ являются инвариантными
+    подпространствами и для оператора $A$. Тогда можно рассмотреть прямую сумму
+    \[ A = A_j \oplus A_j', \]
+    где $A_j = A | X_j$, $A_j' = A | X_j'$.
+
+    Рассмотрим оператор $A_j$. $\lambda_j \in \spectrum{A_j}$, поскольку $A_j -
+    \lambda_j I_j$ — сужение оператора $A - \lambda_j I$ на $X_j$, которое
+    нильпотентно, а значит необратимо.
+
+    Покажем, что никаких других точек спектра оператор $A_j$ не имеет. Пусть
+    $\lambda_0 \in \spectrum{A_j}$. Тогда существует ненулевой вектор $x \in X_j$,
+    что
+    \begin{align*}
+        A_j x &= \lambda_0 x \\
+        A_j x - \lambda_j x &= \lambda_0 x - \lambda_j x \\
+        (A_j - \lambda_j I_j) x &= (\lambda_0 - \lambda_j) x \\
+        (A_j - \lambda_j I_j)^2 x &= (\lambda_0 - \lambda_j)^2 x \\
+        \ldots\ldots\ldots\ldots\ldots \\
+        0 = (A_j - \lambda_j I_j)^{m_j} &= (\lambda_0 - \lambda_j)^{m_j} x \\
+        (\lambda_0 - \lambda_j)^{m_j} x &= 0 \\
+        \lambda_0 &= \lambda_j
+    \end{align*}
+    где $m_j$ — индекс нильпотентности $A_j - \lambda_j I_j$. Таким образом
+    $\spectrum{A_j} = \menge{\lambda_j}$. 
+
+    Ясно, что $\lambda_j \notin \spectrum{A_j'}$, поскольку $A_j' - \lambda_j I_j'$ —
+    сужение $A - \lambda_j I$ на $X_j'$ — обратим.
+
+    По пункту (4) теоремы \ref{th:invarproperties}, $\spectrum{A} = \spectrum{A_j}
+    \cup \spectrum{A_j'}$, значит \[\spectrum{A_j'} = \spectrum{A} \setminus
+    \menge{\lambda_j}\]
+
+    Значит, повторяя аналогичный процесс для подпространства $X_j'$ и оператора
+    $A_j'$, за конечное число шагов (а именно за $m-1$) мы сможем получить разложение
+    \eqref{eq:operatordecomposition}, где каждый из операторов будет иметь
+    одноточечный спектр.
+
+    Первое утверждение теоремы доказано.
+
+    Теперь докажем второе утверждение теоремы.
+    Так как $A = A_1 \oplus \dotsb \oplus A_m$, то
+    $p_A(\lambda) = p_{A_1}(\lambda)\dotsm p_{A_m}(\lambda)$, где $p_A$ —
+    характеристический многочлен $A$, $p_{A_j}$ — характеристический многочлен
+    $A_j$. Кроме того известно, что $p_A(\lambda) = (-1)^n
+    \prod\limits_{j=1}^m(\lambda - \lambda_j)^{k_j}$, и $\spectrum{A_j} =
+    \menge{\lambda_j}, \; j = \overline{1,m}$. Значит
+    \[ p_{A_j}(\lambda) = (-1)^{k_j} (\lambda - \lambda_j)^{k_j}, \quad j =
+        \overline{1,m} \]
+
+    Отсюда следует, что $\dim X_j = k_j, \; j = \overline{1,m}$. 
+    
+    Второе утверждение теоремы доказано.
+
+    Как было показано в начале доказательства теоремы, 
+    $A_j - \lambda_j I_j = Q_j$ — нильпотентный оператор.
+    Найдём его индекс нильпотентности.
+
+    Рассмотрим минимальный многочлен $p_0$ оператора $A$.
+    \begin{align*}
+        p_0(A) &= p_0(A_1) \oplus \dotsb \oplus p_0(A_m) = O \\
+        p_0(\lambda) &= (\lambda - \lambda_1)^{k_1^0} \dotsm
+        (\lambda-\lambda_m)^{k_m^0} \\
+        p_0(A_j) &= \prod_{i=1}^m (A_j - \lambda_i I_j)^{k_i^0}
+    \end{align*}
+
+    Каждый из операторов $A_j - \lambda_i I_j, \; i \neq j$ обратим\footnote{
+        $\spectrum{A_j} = \menge{\lambda_j}$}, а значит и не нильпотентен. Так как
+        $p_0(A_j) = O$ и $(A_j -\lambda_i I_j)^{k_i^0}. \neq O \text{ при } \; i \neq j$,
+        получаем, что $(A_j - \lambda_j I_j)^{k_j^0} = Q^{k_j^0} = O$.
+
+    В силу минимальности многочлена $p_0$ получаем, что $k_j^0$ — индекс
+    нильпотентности $Q_j$. Теорема полностью доказана.
+\end{proof}
+
+\begin{theorem}
+    Чтобы оператор $A\in L(X)$ был оператором простой струкутуры, необходимо и
+    достаточно, чтобы все корни минимального многочлена оператора $A$ имели
+    кратность 1.
+\end{theorem}
+
+\begin{proofbreak}
+    \dindent \textbf{Необходимость}
+
+    Пусть $A$ — оператор простой структуры со спектром $\spectrum{A} = \menge{\lambda_1,
+    \dotsc, \lambda_m}$. По теореме \ref{th:diagonexpansion}, оператор
+    имеет вид 
+    \[ A = \lambda_1 I_1 \oplus \dotsb \oplus \lambda_m I_m \]
+
+    Тогда для любого многочлена $f \in \polyset[\fieldc]{}$ справедливо
+    \[ f(A) = f(\lambda_1) I_1 \oplus \dotsb \oplus f(\lambda_m) I_m \]
+
+    Тогда для того чтобы многочлен $f$ был аннулирующим, достаточно условия
+    $\forall k \in \overline{1,n} \; f(\lambda_k) = 0$, значит, минимальный
+    многочлен будет иметь вид
+    \[ p_0(\lambda) = (\lambda-\lambda_1)\dotsm(\lambda-\lambda_1) \]
+
+    \textbf{Достаточность}
+
+    Пусть $p_0(\lambda) = (\lambda-\lambda_1)\dotsm(\lambda-\lambda_m)$ —
+    минимальный. По теореме \ref{th:operatordecomposition} получаем, что
+    оператор $A$ имеет вид
+    \[ A = \bigoplus_{j=1}^m (\lambda_j I_j + Q_j), \]
+    где $Q_j$ — нильпотентный, причем его индекс нильпотентности равен кратности
+    корня $\lambda_j$ в минимальном многочлене, то есть единице:
+    \[ Q_j = O \]
+
+    Значит, оператор $A$ имеет вид
+    \[ A = \bigoplus_{j=1}^m \lambda_j I_j, \]
+    откуда и следует, что $A$ — оператор простой структуры.
+\end{proofbreak}
+
+

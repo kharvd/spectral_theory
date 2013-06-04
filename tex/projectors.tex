@@ -1,0 +1,125 @@
+\section{Проекторы и прямые суммы подпространств}
+Далее 
+\[
+    \begin{gathered}
+        \dim X = n \\
+        X = X_1 \oplus X_2 \oplus \dotsb \oplus X_m
+    \end{gathered}
+\]
+
+\begin{definition}
+    Оператор $P \in L(X)$ называется \emph{проектором}, если
+    \[ P^2 = P \]
+
+    Матрица $\mathcal{P} \in \matr{n}$ называется \emph{идемпотентной}, если
+    \[ \mathcal{P}^2 = \mathcal{P} \]
+\end{definition}
+
+\begin{definition}
+    Пусть $ P_k, \quad k = \overline{1,m} $ — проекторы. Будем говорить, 
+    что они образуют \emph{разложение единицы}, если
+    \begin{enumerate}
+        \item $I = \sum\limits_{k=1}^{m} P_k$
+        \item $P_i P_j = O \quad \forall i \neq j$
+    \end{enumerate}
+\end{definition}
+
+Пусть далее $m=2$ (аналогично можно рассмотреть случай произвольного $m$).
+\[
+    \begin{alignedat}{2}
+        X &= X_1 &&\oplus X_2 \\
+        x &= \,x_1 &&+ \,x_2
+    \end{alignedat}
+\]
+
+Построим операторы $P_1$ и $P_2$ следующим образом:
+\begin{align*}
+    P_1 x &= x_1 \\
+    P_2 x &= x_2 
+\end{align*}
+
+Линейность очевидна. Ясно, что построенные операторы являются проекторами.
+
+\begin{lemma} \label{lemma:proj1}
+    Построенные проекторы образуют разложение единицы:
+    \begin{enumerate}
+        \item $P_1 + P_2 = I$
+        \item $P_1 P_2 = P_2 P_1 = O$
+    \end{enumerate}
+\end{lemma}
+\begin{proofbreak}
+    \begin{enumerate}
+        \item $(P_1 + P_2) x = P_1 x + P_2 x = x_1 + x_2 = x = Ix$
+        \item $(P_1 P_2) x = P_1 (P_2 x) = P_1 x_2 = P_1 (0 + x_2) = 0$
+    \end{enumerate}
+\end{proofbreak}
+
+\begin{lemma} \label{lemma:proj2}
+    Пусть задано разложение единицы
+    \begin{gather*}
+        \left\{
+        \begin{array}{l}
+            I = P_1 + P_2 \\
+            P_1 P_2 = O
+        \end{array}
+        \right. \\
+            \shortintertext{Тогда}
+            X = X_1 \oplus X_2, \\
+            \shortintertext{где}
+        \begin{aligned}
+            X_1 &= \im P_1 \\
+            X_2 &= \im P_2 
+        \end{aligned}
+    \end{gather*}
+\end{lemma}
+\begin{proof}
+    Пусть $x\in X$. Ясно, что его можно представить как сумму $x = x_1 + x_2$,
+    где $x_1 \in X_1$ и $x_2 \in X_2$:
+    \begin{gather*}
+        \begin{alignedat}{3}
+            P_1 x &= x_1 &&\in \im P_1 &&= X_1 \\
+            P_2 x &= x_2 &&\in \im P_2 &&= X_2 
+        \end{alignedat}\\
+        Ix = P_1 x + P_2 x = x_1 + x_2 
+    \end{gather*}
+
+    Покажем, что такое представление единственно. Пусть
+    \begin{equation}\label{eq:otherrepresentation}
+        x = x_1' + x_2', \quad x_i' \in X_i, \quad i = 1, 2 
+    \end{equation}
+
+    Можно показать, что $P_1 x_1' = x_1'$
+    \footnote{\[ x_1' \in \im P_1 \Rightarrow \exists x_0 \in X 
+        \quad P_1 x_0 = x_1' \Rightarrow \]
+        \[ \Rightarrow  P_1^2 x_0 = P_1 x_1' \Rightarrow P_1 x_0 = P_1 x_1' \Rightarrow x_1' =
+        P_1 x_1' \]}
+    и $P_1 x_2' = 0$ \footnote{\[ P_1 x_2' = P_1 (P_2
+        x_0) = 0 \]}
+
+    Применим к обеим частям равенства (\ref{eq:otherrepresentation}) оператор $P_1$:
+    \[ P_1 x = P_1 x_1' + P_1 x_2' = x_1 \]
+
+    Применим к обеим частям того же равенства (\ref{eq:otherrepresentation}) оператор $P_2$:
+    \[ P_2 x = P_2 x_1' + P_2 x_2' = x_2 \]
+
+    Таким образом, объединяя полученные равенства, получаем:
+    \begin{alignat*}{2}
+            P_1 x &= x_1 &&= x_1' \\
+            P_2 x &= x_2 &&= x_2' 
+    \end{alignat*} 
+\end{proof}
+
+Пусть $P \in L(X)$ — проектор. Рассмотрим оператор вида $ I - P $. Покажем, что
+он является проектором:
+\[ (I - P)^2 = I - 2P + P^2 = I - 2P + P = I - P \]
+
+Покажем, что проекторы $I - P$ и $P$ образуют разложение единицы:
+\[ \begin{gathered}
+    (I - P)P = P - P^2 = O \\
+    (I - P) + P = I 
+\end{gathered} \]
+
+Проектор $I-P$ называется \emph{дополнительным проектором к $P$}.
+
+Из леммы \ref{lemma:proj2} следует, что
+\[ X = \im P \oplus \im (I - P) \]

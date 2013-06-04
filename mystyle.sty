@@ -1,0 +1,58 @@
+\ProvidesPackage{mystyle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{calc}
+\usepackage{framed}
+\usepackage{mytheorems}
+\usepackage{bbm}
+\usepackage[left=2cm,right=2cm,top=1.7cm,headsep=0.5cm,bottom=2cm]{geometry}
+
+\pagestyle{fancy}
+\fancyheadoffset[LE,RO]{\marginparsep+\marginparwidth}
+\renewcommand{\sectionmark}[1]{\markright{\S\thesection. #1}}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\rightmark}
+%\fancyhead[RE]{\leftmark}
+\fancypagestyle{plain}{%
+\fancyhead{} % get rid of headers
+\renewcommand{\headrulewidth}{0pt} % and the line
+}
+
+\allowdisplaybreaks[1]
+
+\numberwithin{equation}{section}
+
+\titleformat{\section}{\large\bfseries}{\S\thesection.}{.5em}{}
+
+% Convenient macros
+\renewcommand{\dotsb}{\dots}
+\renewcommand{\dotsm}{\dots}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\ker}{\operatorname{Ker}}
+\renewcommand{\Re}{\operatorname{\mathfrak{Re}}}
+\renewcommand{\Im}{\operatorname{\mathfrak{Im}}}
+\DeclareMathOperator{\degr}{degr}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\im}{Im}
+\newcommand{\fieldk}{\mathbb{K}}
+\newcommand{\fieldc}{\mathbb{C}}
+\newcommand{\fieldr}{\mathbb{R}}
+\newcommand{\polyset}[2][\fieldk]{\mathcal{P}_{#2}({#1})}
+\newcommand{\matr}[2][\fieldk]{\mathrm{Matr}_{#2}({#1})}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\spectrum}[1]{\operatorname{\sigma}(#1)}
+\newcommand{\menge}[1]{\left\{#1\right\}} % Menge is German for set
+
+\newcommand{\dindent}{\indent\indent}

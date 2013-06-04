@@ -1,0 +1,218 @@
+\section{Инвариантные подпространства. Разложение операторов}
+Далее $A \in L(X)$.
+
+\begin{definition}
+    Подпространство $ M \subset X $ называется \emph{инвариантным} для $A$, если
+    \[ A(M) \subset M \]
+
+    Иначе:
+    \[ \forall x \in M \quad Ax \in M \]
+\end{definition}
+
+Далее сужение оператора $A$ на инвариантное подпространство $M$ будем обозначать
+$A_M$ или $A \vert M $.
+
+\begin{theorem} \label{th:invariantexists}
+    Пусть $X$ — комплексное линейное пространство, $\dim X > 1$. Тогда для
+    любого оператора $A \in L(X)$ имеется инвариантное подпространство ненулевой
+    размерности.
+\end{theorem}
+\begin{proof}
+    Пусть $A\in L(X)$. Так как пространство комплексное, $\spectrum{A} \neq
+    \varnothing$, т.е. имеется хотя бы одно собственное значение $\lambda_1$:
+    \[ Ae_1 = \lambda_1 e_1 \]
+    
+    Рассмотрим множество
+    \[ M = \menge{ \alpha e_1 : \alpha \in \fieldc } \]
+
+    Это инвариантное подпространство, т. к.
+    \[  A(\alpha e_1) = \alpha \lambda_1 e_1 \in M \]
+\end{proof}
+
+В вещественном пространстве может не быть инвариантных подпространств.
+\begin{example}
+    \begin{gather*}
+        A : \fieldr^2 \to \fieldr^2 \\  
+        \begin{aligned}
+            A e_1 &= e_2 \\
+            A e_2 &= -e_1
+        \end{aligned}
+    \end{gather*}
+\end{example}
+
+TODO: свойства матриц
+
+\begin{definition}
+    Пусть $X = X_1 \oplus \dotsb \oplus X_m$ — прямая сумма инвариантных
+    относительно $A$ подпространств $X_k, \; k = \overline{1,m}$. В~этом 
+    случае говорят, что $A$ приводится (разлагается) семейством
+    подпространств $X_k$ в прямую сумму операторов:
+    \[ A = A_1 \oplus \dotsb \oplus A_m, \]
+    где $A_k = A \vert X_k$.
+\end{definition}
+
+Такое обозначение обусловлено тем, что элемент $Ax$ можно единственным образом
+представить в виде суммы:
+\[ Ax = A(x_1 + \dotsb + x_m) = Ax_1 + \dotsb + Ax_m = A_1 x_1 + \dotsb + A_m
+    x_m \]
+
+\begin{theorem} \label{th:diagonexpansion}
+    Пусть $A \in L(X)$ — оператор простой структуры, $\spectrum{A} = \menge{\lambda_i}_{i=1}^m, \; 
+    m \le n$. Тогда $X = \bigoplus\limits_{k=1}^m X_k$, где $X_k =
+    E(\lambda_k, A) = \ker (A-\lambda_k I)$ и оператор $A$ допускает разложение
+    \[ A = \lambda_1 I_1 \oplus \dotsb \oplus \lambda_m I_m \]
+\end{theorem}
+
+\begin{proof}
+    Нетрудно показать, что любое собственное подпространство оператора является
+    инвариантным относительно этого оператора. 
+    
+    Покажем, что $ X = \bigoplus\limits_{k=1}^m X_k$. 
+    
+    По определению оператора простой структуры
+    существует базис $e_1, \dotsc, e_n$ в $X$ такой, что $Ae_k = \lambda_{i}
+    e_k$. Каждый из этих векторов принадлежит одному из подпространств $X_i$.
+    Таким образом каждый вектор $x\in X$ можно представить в виде суммы
+    некоторых векторов из $X_k,\; k = \overline{1,m}$, причем такое
+    представление единственно в силу свойств базиса.
+
+    Ясно также, что сужение оператора $A$ на инвариантное подпространство
+    $E(\lambda_k, A)$ будет иметь вид:
+    \[ A_k = A | E(\lambda_k, A) = \lambda_k I_k \]
+    где $I_k \in L(X_k)$ — тождественный оператор.
+\end{proof}
+
+\begin{theorem}\label{th:invarproperties}
+    Пусть $A\in L(X)$ допускает разложение $A = A_1 \oplus \dotsb \oplus A_m$
+    относительно прямой суммы инвариантных подпространств $ X = X_1 \oplus
+    \dotsb \oplus X_m$. Тогда
+    \begin{enumerate}
+        \item $ 
+            \begin{array}[t]{c @{{}={}} c @{{}\oplus \dotsb \oplus{}} c}
+                \ker A & \ker A_1 & \ker A_m \\[0.3em]
+                \im A & \im A_1 &\im A_m 
+            \end{array} $
+        \item $ 
+            \begin{aligned}[t]
+                \ker (A-\lambda I) &= \bigoplus\limits_{k=1}^m \ker (A_k -
+                \lambda I_k) && \forall \lambda \in \fieldc \\ 
+                \im (A-\lambda I) &= \bigoplus\limits_{k=1}^m \im (A_k -
+                \lambda I_k) && \forall \lambda \in \fieldc 
+            \end{aligned} $
+        \item $A$ обратим тогда и только тогда, когда обратима каждая его часть
+            $A_k$.
+        \item $ \spectrum{A} = \bigcup\limits_{k=1}^m \spectrum{A_k} $
+    \end{enumerate}
+\end{theorem}
+
+\begin{proofbreak}
+    \begin{enumerate}
+        \item Пусть $ x \in \ker A $, $x = x_1 + \dotsb + x_m$. Тогда
+            \[ 0 = Ax = A_1 x_1 + \dotsb + A_m x_m, \quad A_k x_k \in X_k, \; k
+            = \overline{1,m}\]
+
+            Из свойств прямой суммы (единственности представления нуля)
+            получаем, что $A_k x_k = 0, \; k = \overline{1,m}$, т.е. $x_k \in
+            \ker A_k $. Отсюда и получаем первое равенство.
+
+            Пусть $y \in \im A$. Тогда существует $x\in X$, $x = x_1 + \dotsb +
+            x_m$ такой, что $y = Ax$.
+            \[ \im A \ni y = Ax = A_1 x_1 + \dotsb + A_m x_m, \quad A_k x_k \in
+                \im A_k, \; k
+            = \overline{1,m}\]
+        \item Рассмотрим скалярный оператор $\lambda I$:
+            \[\lambda I = \lambda I_1 \oplus \dotsb \oplus \lambda I_m\] 
+            относительно $X_1, \dotsc, X_m$. Следовательно
+            \[ A - \lambda I = (A_1 - \lambda I_1) \oplus \dotsb \oplus (A_m -
+                \lambda I_m) \]
+            Далее, применяя (1) для оператора $A-\lambda I$ получаем равенства
+            (2).
+        \item Оператор $A$ обратим тогда и только тогда, когда $\ker A = \menge{0}$.
+            Отсюда и из свойства (1), очевидно, следует утверждение (3) теоремы.
+
+            Пусть $A$ обратим. Рассмотрим оператор $B$ такой, что
+            \begin{alignat*}{3}
+                B &= A_1^{-1} &&\oplus \dotsb &&\oplus A_m^{-1} \\
+                Bx &= A_1^{-1} x_1 &&+ \dotsb &&+ A_m^{-1} x_m
+            \end{alignat*}
+
+            Покажем, что оператор $B$ — обратный к оператору $A$:
+            \[ A(Bx) = A(A_1^{-1} x_1 + \dotsb + A_m^{-1} x_m) = x_1 + \dotsb +
+                x_m = x \]
+            т.к. $A_k^{-1} x_k \in X_k$
+            
+            Таким образом
+            \[ A^{-1} = A_1^{-1} \oplus \dotsb \oplus A_m^{-1} \]
+        \item Рассмотрим прямую сумму операторов
+            \[ A - \lambda I = (A_1 - \lambda I_1) \oplus \dotsb \oplus (A_m -
+                \lambda I_m) \]
+            
+            $\lambda \in \spectrum{A}$ $\Leftrightarrow$ $A-\lambda I$ необратим
+            $\Leftrightarrow$ необратим хотя бы один из $A_k -\lambda I_k$, т.
+            е.
+            \[ \spectrum{A} = \spectrum{A_1} \cup \dotsb \cup \spectrum{A_m} \]
+    \end{enumerate}
+\end{proofbreak}
+
+\begin{theorem}
+    Пусть $A\in L(X)$, $X = X_1 \oplus \dotsb \oplus X_m$, проекторы $P_1,
+    \dotsc, P_m$ образуют разложение единицы, причем $\im P_k = X_k$. 
+    Тогда для того чтобы каждое из подпространств $X_k$ было инвариантным
+    относительно $A$, необходимо и достаточно, чтобы каждый из операторов $P_k$
+    был перестановочен с $A$:
+    \[ AP_k = P_kA, \quad k = \overline{1,m} \]
+\end{theorem}
+
+\begin{proofbreak}
+    \dindent \textbf{Необходимость}:
+    Пусть $A(X_k) \subset X_k, \quad k = \overline{1,m}$.
+    \begin{multline*}
+        AP_kx = I A P_k x = (P_1 + \dotsb + P_k + \dotsb + P_m) A P_k x
+        = \\ = P_k A P_k x = P_k A P_k (x_1 + \dotsb + x_k + \dotsb + x_m) = P_k A
+        P_k x_k =\\= P_k A x_k = \underbrace{P_k A x_1}_{= 0} + \dotsb + P_k A
+        x_k + \dotsb + \underbrace{P_k A x_m}_{= 0} = P_k A x
+    \end{multline*}
+
+    Необходимость доказана.
+
+    \textbf{Достаточность}:
+    Пусть $x \in X_k$.
+    \[ Ax = AP_k x = P_k A x \in \im P_k = X_k \]
+\end{proofbreak}
+
+\begin{theorem}\label{th:spectraldecomposition}
+    Пусть $A\in L(X)$ — оператор простой структуры, $\spectrum{A} = \menge{\lambda_1,
+    \dotsc, \lambda_m}$. Тогда 
+    \begin{equation}\label{eq:spectraldecomposition}
+        A = \sum_{k=1}^m \lambda_k P_k,
+    \end{equation}
+    где $P_k$ — проекторы, образующие разложение единицы, $\im P_k = E(\lambda_k, A)$.
+\end{theorem}
+
+\begin{proof}
+    Пусть $x \in X$. По теореме \ref{th:diagonexpansion}
+    \[ X = X_1 \oplus \dotsb \oplus X_m, \quad X_k = E(\lambda_k, A),\; k =
+    \overline{1,m} \]
+
+    Тогда
+    \[ x = x_1 + \dotsb + x_m = P_1 x + \dotsb + P_m x, \quad P_k x \in X_k \]
+
+    Применим к правой и левой частям равенства оператор $A$:
+    \begin{multline*}
+        Ax = AP_1 x + \dotsb + AP_m x = \\ = \lambda_1 P_1 x + \dotsb + \lambda_m
+        P_m x =  \bigg( \sum_{k=1}^m \lambda_k P_k \bigg) x
+    \end{multline*}
+\end{proof}
+
+\begin{definition}
+    Представление \eqref{eq:spectraldecomposition} называется \emph{спектральным
+    разложением} оператора простой структуры.
+\end{definition}
+
+\begin{corollaryth}
+    Если $\mathcal{A} \in \matr{n}$ диагонализируема, $\spectrum{A} = \menge{ \lambda_1,
+    \dotsc, \lambda_m }$, то 
+    \[ \mathcal{A} = \sum_{k=1}^m \lambda_k \mathcal{P}_k, \]
+    где $\mathcal{P}_{k}^2 = \mathcal{P}_k$, $ E = \sum\limits_{k=1}^m \mathcal{P}_k $,
+    $\mathcal{P}_i \mathcal{P}_j = 0 \quad \forall i \neq j$
+\end{corollaryth}

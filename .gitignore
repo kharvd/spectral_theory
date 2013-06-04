@@ -1,0 +1,11 @@
+*.aux
+*.aux
+*.dvi
+*.idv
+*.log
+*.swp
+*.thm
+*.toc
+*.vim
+*.tmp
+tex/*.swp

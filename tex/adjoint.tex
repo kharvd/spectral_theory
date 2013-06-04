@@ -1,0 +1,392 @@
+\section{Сопряжённые операторы. Структурная теория}
+
+Далее будет рассматриваться конечномерное евклидово пространство $H$ над полем
+действительных либо комплексных чисел.
+
+\begin{lemma} \label{le:functionalform}
+    Любой линейный функционал $\xi : H \to \fieldk$ допускает единственное
+    представление вида
+    \[ \xi(x) = \langle x, a\rangle, \quad a \in H \]
+\end{lemma}
+
+\begin{proof}
+    Выберем ортонормированный базис $e_1, \dotsc, e_n$ в $H$. Пусть $\xi : H \to
+    \fieldk$ — линейный функционал. Определим $a$ следующим образом:
+    \[ a = \sum_{j=1}^n \overline{\xi(e_j)} e_j \]
+
+    Рассмотрим скалярное произведение $\langle e_k, a \rangle, \; k =
+    \overline{1,n}$:
+    \[ \langle e_k, a \rangle = \langle e_k, \sum_{j=1}^n \overline{\xi(e_j)}
+    e_j \rangle = \langle e_k, \overline{\xi(e_k)} e_k \rangle = \xi(e_k) \]
+
+    Тогда
+    \[ \xi(x) = \sum_{j=1}^n x_j \xi(e_j) = \sum_{j=1}^n x_j \langle
+        e_j, a\rangle = \langle \sum_{j=1}^m x_j e_j, a\rangle = \langle
+    x, a\rangle \] 
+\end{proof}
+
+\begin{definition}
+    Оператор $B\in L(H)$ называется \emph{сопряжённым к} $A\in L(H)$, если
+    \[ \langle Ax, y \rangle = \langle x, By\rangle \quad \forall x, y \in H\]
+\end{definition}
+
+\begin{lemma}
+    Для любого линейного оператора существует единственный оператор, сопряжённый
+    к нему.
+\end{lemma}
+
+\begin{proof}
+    Пусть $y \in H$. Рассмотрим функционал $\xi_y : H \to \fieldk$ вида
+    \[ \xi_y(x) = \langle Ax, y\rangle \]
+
+    По лемме 1 существует $a \in H$, что 
+    \[ \xi_y(x) = \langle x, a\rangle \]
+
+    Положим $By = a$. Докажем, что $B$ — линейный оператор из $L(H)$.
+
+    Пусть $y = \alpha y_1 + \beta y_2$.
+    \begin{gather*}
+        \begin{alignedat}{2}
+            \xi_{y_1}(x) &= \langle Ax, y_1\rangle &&= \langle x, By_1\rangle \\
+            \xi_{y_2}(x) &= \langle Ax, y_2\rangle &&= \langle x, By_2\rangle \\
+            \xi_{y}(x) &= \langle Ax, \alpha y_1 + \beta y_2 \rangle &&= \langle x,
+            B(\alpha y_1 + \beta y_2) \rangle
+        \end{alignedat} \\
+        \begin{multlined}
+            \xi_{y}(x) = \langle Ax, \alpha y_1 \rangle + \langle Ax, \beta y_2
+            \rangle = \overline{\alpha}\xi_{y_1}(x) + \overline{\beta}\xi_{y_2}(x) =\\= \langle x, \alpha
+            By_1 + \beta By_2\rangle
+        \end{multlined} \\
+        \langle x, B(\alpha y_1 + \beta y_2) \rangle = \langle x, \alpha By_1 +
+        \beta By_2\rangle \\
+        B(\alpha y_1 + \beta y_2) = \alpha By_1 + \beta By_2 \\
+        \langle Ax, y\rangle = \langle x, By\rangle
+    \end{gather*}
+\end{proof}
+
+Сопряженный оператор обозначается звёздочкой:
+\[ A^* = B \]
+
+\begin{lemma}[свойства сопряженных операторов]\label{lemma:adjointproperties}
+    Для любых операторов $A, B \in L(H)$ и любых чисел $\alpha, \beta \in
+    \fieldk$ справедливы следующие утверждения:
+    \begin{enumerate}
+        \item $ (\alpha I)^* = \overline{\alpha}I $
+        \item $ (AB)^* = B^* A^* $
+        \item $ (\alpha A + \beta B)^* = \overline{\alpha} A^* +
+            \overline{\beta} B^* $
+        \item Если $A$ обратим, то и $A^*$ обратим, причём
+            \[ (A^{-1})^* = (A^*)^{-1} \]
+        \item $ (A^*)^* = A $
+        \item Если $M$ — инвариантное подпространство $A$ и $A^*$, то $(A|M)^* =
+            A^* | M $
+    \end{enumerate}
+\end{lemma}
+
+\begin{proofbreak}
+    \begin{enumerate}
+        \item $
+                \langle \alpha I x, y \rangle = \alpha \langle x, y\rangle =
+                \langle x, \overline{\alpha} y \rangle = \langle x,
+                \underbracket[0.5pt]{\overline{\alpha} I}_{\mathclap{=(\alpha I)^*}} y\rangle    
+                $
+        \item $ \langle ABx, y \rangle = \langle A(Bx), y\rangle = \langle
+            Bx, A^*y\rangle = \langle x, B^*A^*y\rangle $
+        \item Доказывается аналогично (используются свойства скалярного
+            произведения)
+        \item $
+            \begin{alignedat}[t]{2}
+                AA^{-1} &= A^{-1}A &&= I \\
+                (AA^{-1})^* &= (A^{-1}A)^* &&= I^* \\
+                (A^{-1})^* A^* &= A^* (A^{-1})^* &&= I \\
+                (A^{-1})^* &= (A^*)^{-1}
+            \end{alignedat}
+            $
+        \item Доказывается при помощи свойства эрмитовой симметричности скалярного
+            произведения.
+        \item Очевидно.
+    \end{enumerate}
+\end{proofbreak}
+
+\begin{lemma}\label{lemma:orthogonaladjoint}
+    Пусть $A \in L(H)$. Тогда $H$ раскладывается в ортогональную прямую сумму
+    подпространств $H = \im A \oplus \ker A^*$ и $H = \ker A \oplus \im A^*$.
+\end{lemma}
+
+\begin{proof}
+    Для доказательства леммы достаточно показать, что $(\im A)^\perp = \ker
+    A^*$. Пусть $y \in (\im A)^\perp$. Тогда $\langle Ax, y\rangle = 0$, т. к.
+    $\forall x \in H \; y \perp Ax \in \im A$. Значит $\langle x, A^*y\rangle =
+    0$. Тогда, в силу произвольности $x$, подставляя вместо него $A^* y$
+    получаем
+    \[ \langle A^* y, A^* y\rangle = 0 \Rightarrow A^* y = 0 \Rightarrow y \in
+    \ker A^* \]
+
+    Теперь обратно: пусть $y \in \ker A^*$. Тогда $\langle x, A^* y\rangle = 0$,
+    и $\langle Ax, y\rangle = 0$, значит $y \perp \im A$ и тогда $y \in (\im
+    A)^\perp$.
+\end{proof}
+
+Непосредственно из леммы \ref{lemma:orthogonaladjoint} следует
+\begin{theorem}[Фредгольма]
+    Уравнение вида
+    \[ Ax = b, \quad b \in H \]
+    разрешимо тогда и только тогда, когда вектор $b$ перпендикулярен всем
+    решениям однородного уравнения
+    \[ A^*y = 0 \]
+\end{theorem}
+
+\begin{lemma}\label{lemma:adjointmatrix}
+    Пусть $e_1, \dotsc, e_n$ — ортонормированный базис, $A, B \in L(H)$,
+    $\mathcal{A} = (a_{ij}) \in \matr{n}$, $\mathcal{B} = (b_{ij}) \in \matr{n}$
+    — матрицы этих операторов в том же базисе. Тогда для того чтобы $B = A^*$
+    необходимо и достаточно, чтобы $b_{ij} = \overline{a_{ji}}$.
+\end{lemma}
+
+\begin{proof}
+    \[ Ae_j = x = \sum_{i=1}^n a_{ij}e_i = \sum_{i=1}^n \langle x, e_i\rangle
+    e_i = \sum_{i=1}^n \langle Ae_j, e_i \rangle \]
+
+    Таким образом 
+    \[ a_{ij} = \langle Ae_j, e_i\rangle \]
+
+    Доказательство в обе стороны проводится аналогично:
+    \begin{gather*}
+            Ae_j = \sum_{i=1}^n a_{ij} e_i \\
+            a_{ij} = \langle Ae_j, e_i \rangle = \langle e_j, A^* e_i\rangle =
+            \overline{\langle A^* e_i, e_j\rangle} = \overline{b_{ji}}
+    \end{gather*}
+\end{proof}
+
+\begin{definition}
+    Оператор $A\in L(H)$ называется \emph{самосопряженным}, если $A^* = A$
+    \[ \langle Ax, y\rangle = \langle x, Ay\rangle \]
+\end{definition}
+
+\begin{example}
+    Пусть $A\in L(H)$. Тогда операторы
+    \begin{align*}
+        \Re A &= \frac{A + A^*}{2} \\
+        \Im A &= \frac{A - A^*}{2i}
+    \end{align*}
+    являются самосопряженными (проверяется подстановкой).
+    При этом $A = \Re A + i \Im A$.
+\end{example}
+
+\begin{example}
+    Также самосопряженным является оператор $AA^*$:
+    \[ (AA^*)^* = (A^*)^* A^* = AA^* \]
+\end{example}
+
+\begin{definition}
+    Матрица $\mathcal{B} = (b_{ij}) \in \matr{n}$ называется сопряженной к
+    $\mathcal{A} = (a_{ij}) \in \matr{n}$, если
+    \[ b_{ij} = \overline{a_{ji}} \]
+\end{definition}
+
+Непосредственно из леммы \ref{lemma:adjointmatrix} следует, что оператор $A\in
+L(H)$ является самосопряженным тогда и только тогда, когда его матрица в
+некотором ортонормированном базисе является самосопряженной.
+
+\begin{definition}
+    Проектор $P\in L(H)$ называется \emph{ортогональным (ортопроектором)}, если
+    он осуществляет разложение $H$ в ортогональную прямую сумму.
+    \begin{gather*}
+        H = \im P \oplus \im (I - P) \\
+        \im P \perp \im (I - P) = \ker P
+    \end{gather*}
+\end{definition}
+
+\begin{lemma}
+    Проектор $P\in L(H)$ является ортопроектором тогда и только тогда, когда
+    $P^* = P$.    
+\end{lemma}
+
+\begin{proofbreak}
+    \dindent \textbf{Необходимость}
+
+    Пусть $P$ — ортопроектор, то есть
+    \[ \im P \perp \im (I - P) \]
+
+    Пусть $H \ni x = x_1 + x_2$, $H \ni y = y_1 + y_2$, где $x_1, y_1 \in \im
+    P$, $x_2, y2 \in \im (I - P$.
+    \begin{multline*}
+        \langle Px, y\rangle = \langle x_1, y_1 + y_2 \rangle = 
+        \langle x_1, y_1 \rangle + \langle x_1, y_2 \rangle =\\= 
+        \langle x_1, Py \rangle = \langle x_1 + x_2, Py
+        \rangle = \langle x, Py \rangle
+    \end{multline*}
+
+    \textbf{Достаточность}
+    Пусть проектор $P$ самосопряжен. Тогда по лемме
+    \ref{lemma:orthogonaladjoint} получаем, что 
+    \[ H = \im P \oplus \ker P = \im P \oplus \im (I - P) \]
+    где предполагается разложение в ортогональную прямую сумму.
+\end{proofbreak}
+
+\begin{corollaryle}
+    Дополнительный проектор к ортопроектору есть ортопроектор.
+    \[ (I - P)^* = I^* - P^* = I - P \]
+\end{corollaryle}
+
+\begin{definition}
+    $B \in L(H)$ называется \emph{антисамосопряженным (кососамосопряженным)},
+    если $B^* = -B$.
+\end{definition}
+
+\begin{lemma}
+    Если $B \in L(H)$ — антисамосопряженный оператор, то существует
+    самосопряженный оператор $A$ такой, что $B = iA$.    
+\end{lemma}
+
+\begin{proof}
+    Пусть $B^* = -B$, $A = -i B$.
+    \[ A^* = i B^* = -iB = A \]
+    то есть $A$ — самосопряженный оператор и $B = iA$.
+\end{proof}
+
+\begin{definition}
+    Оператор $U \in L(H)$ называется \emph{унитарным}, если имеют место равенства:
+    \[ U^* U = UU^* = I, \]
+    т. е. $U$ — обратим и $U^* = U^{-1}$.
+\end{definition}
+
+Пусть $U$ — унитарный оператор.
+\[ \norm{Ux}^2 = \langle Ux, Ux \rangle = \langle x, U^* Ux\rangle = \langle
+x, x \rangle = \norm{x}^2 \]
+
+То есть \emph{всякий унитарный оператор сохраняет длины векторов (является
+изометрией)}.
+
+\begin{definition}
+    Оператор $A \in L(H)$ называется \emph{нормальным}, если
+    \[ AA^* = A^* A \]
+\end{definition}
+
+Непосредственно из определений следует, что самосопряженные, кососамосопряженные
+и унитарные операторы являются нормальными.
+
+\begin{lemma}\label{lemma:invariantcommute}
+    Пусть $A, B \in L(X)$ — операторы в произвольном линейном пространстве — перастановочны:
+    \[ AB = BA \]
+
+    Тогда $\ker B$ и $\im B$ являются инвариантными подпространствами для
+    $A$
+\end{lemma}
+
+\begin{proof}
+    Пусть $x \in \ker B$, тогда $Bx = 0$
+    \[ B(Ax) = A(Bx) = A0 = 0 \Rightarrow Ax \in \ker B \]
+
+    Аналогично доказывается для образа.
+\end{proof}
+
+\begin{lemma}
+    \begin{equation*}
+        \spectrum{A^*} = \overline{\spectrum{A}}
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    Пусть $\lambda \in \fieldk$.
+    \[ (A - \lambda I)^* = A^* - \overline{\lambda} I \]
+    
+    Оператор $A - \lambda I$ обратим тогда и только тогда, когда обратим $A^* -
+    \overline{\lambda}I$, откуда и следует утверждение теоремы.
+\end{proof}
+
+\begin{theorem}
+    Пусть $A \in L(H)$ — нормальный оператор, $\spectrum{A} = \menge{\lambda_1,
+    \dotsc, \lambda_m}$, $\fieldk = \fieldc$. Тогда
+    \begin{enumerate}
+        \item $E(\overline{\lambda_i}, A^*) = E(\lambda_i, A), \; i =
+            \overline{1,m}$
+        \item Пространство $H$ раскладывается в ортогональную прямую сумму
+            \[ H = E(\lambda_1, A) \oplus \dotsb \oplus E(\lambda_m, A) \]
+        \item $A$ и $A^*$ — операторы простой структуры
+    \end{enumerate}
+\end{theorem}
+
+\begin{proofbreak}
+    \dindent Рассмотрим собственное подпространство $E(\lambda_k, A) = M$. Поскольку $A$ и
+    $A^*$ перестановочны, то по лемме \ref{lemma:invariantcommute} для оператора
+    $A^*$ подпространство $M$ также будет инвариантным.
+
+    Покажем, что $E(\lambda_k, A) \subset E(\overline{\lambda_k},A^*)$.
+    Пусть $x \in E(\lambda_k, A)$.
+    Рассмотрим сужение $(A-\lambda_k I)_M = O_M$. $M$ инвариантно для
+    $A-\lambda_k I$ и для $A^* - \overline{\lambda_k} I$ и по пункту (6) леммы
+    \ref{lemma:adjointproperties} получаем, что
+    \[ O_M = (A-\lambda_k I)_M = ((A-\lambda_k)^*)_M = (A^* - \overline{\lambda_k}
+    I)_M \]
+
+    Таким образом
+    \[ (A^* - \overline{\lambda_k} I)_M = O_M \]
+
+    Значит $A^*x = \overline{\lambda_k} x$, а следовательно $x \in
+    E(\overline{\lambda_k}, A^*)$.
+
+    Обратное включение доказывается аналогично.
+
+    Итак, $E(\lambda_1, A) = E(\lambda_1, A^*)$.
+    \[ H = E(\lambda_1, A) \oplus H_1, \quad H_1 = (E(\lambda_1,A))^\perp \]
+
+    Докажем, что $H_1$ инвариантно для $A$ (аналогично показывается для $A^*$).
+
+    Пусть $x \in H_1,\; e\in E(\lambda_1, A)$.
+    \begin{multline*}
+        \langle Ax, e\rangle = \langle x, A^* e\rangle = \langle x,
+        \overline{\lambda_1} e\rangle = \lambda_1 \langle x, e\rangle = 0
+        \Rightarrow \\ \Rightarrow Ax \perp E(\lambda_1, A) \Rightarrow Ax \in H_1
+    \end{multline*}
+
+    Таким образом операторы $A$ и $A^*$ раскладываются в прямую сумму
+    операторов:
+    \[
+        \begin{aligned}
+            A &= \lambda_1 I_1 \oplus A_2 \\
+            A^* &= \overline{\lambda_1} I_1 \oplus A_2^*
+        \end{aligned}
+    \]
+
+    Из пункта (4) теоремы \ref{th:invarproperties} получаем, что
+    \[ \spectrum{A} = \menge{\lambda_2, \dotsc, \lambda_m} \]
+
+    Продолжая аналогичный процесс для операторов $A_2$ и $A_2^*$ до тех пор,
+    пока не останется одна точка спектра, получаем разложения:
+    \begin{align*}
+        A &= \lambda_1 I_1 \oplus \dotsb \oplus \lambda_{m-1} I_{m-1} \oplus A_m
+        \\
+        A^* &= \overline{\lambda_1} I_1 \oplus \dotsb \oplus
+        \overline{\lambda_{m-1}} I_{m-1} \oplus A_m^*
+    \end{align*}
+    относительно подпространств
+    \begin{align*}
+        H &= E(\lambda_1,A) \oplus \dotsb \oplus E(\lambda_{m-1}, A) \oplus H_m
+        \\
+        H &= E(\overline{\lambda_1},A) \oplus \dotsb \oplus
+        E(\overline{\lambda_{m-1}}, A) \oplus H_m
+    \end{align*}
+    где $A_m$ и $A_m^*$ — сопряженные операторы с одной точкой спектра. $A_m$ можно представить в виде
+    \[ A_m = \lambda_m I_m + Q, \]
+    где $Q$ — нильпотентный либо нулевой. 
+    
+    Понятно, что если $x \in E(\lambda_m, A)$, то $Qx = 0$. Рассмотрим прямую
+    сумму
+    \[ H_m = E(\lambda_m, A) \oplus (E(\lambda_m,A))^\perp \]
+
+    Как уже было показано, $(E(\lambda_m, A))^\perp$ — инвариантное
+    подпространство. Пусть $x \in (E(\lambda_m, A))^\perp$. Тогда и $Ax \in
+    (E(\lambda_m, A))^\perp$.
+    \begin{gather*}
+        (E(\lambda_m, A))^\perp \ni Ax = \lambda_m x + Qx,\\
+        \lambda_m x \in E(\lambda_m, A), \; Qx \in (E(\lambda_m,A))^\perp
+    \end{gather*}
+
+    По определению прямой суммы $Ax$ единственным образом представимо в виде
+    суммы
+    \[ Ax = 0 + Qx \]
+
+    Таким образом $\lambda_m x = 0$, откуда следует, что $x = 0$, то есть
+    $H_m = E(\lambda_m, A)$, $A_m = \lambda_m I_m$, что и требовалось доказать.
+\end{proofbreak}
