@@ -259,7 +259,8 @@ L(H)$ является самосопряженным тогда и только
 x, x \rangle = \norm{x}^2 \]
 
 То есть \emph{всякий унитарный оператор сохраняет длины векторов (является
-изометрией)}.
+изометрией)} (можно показать, что верно и обратное: всякий изометрический
+изоморфизм есть унитарный оператор).
 
 \begin{definition}
     Оператор $A \in L(H)$ называется \emph{нормальным}, если
@@ -298,7 +299,7 @@ x, x \rangle = \norm{x}^2 \]
     \overline{\lambda}I$, откуда и следует утверждение теоремы.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{th:normaldiagonalizable}
     Пусть $A \in L(H)$ — нормальный оператор, его спектр $\spectrum{A} = \menge{\lambda_1,
     \dotsc, \lambda_m}$, $\fieldk = \fieldc$. Тогда
     \begin{enumerate}
@@ -393,3 +394,71 @@ x, x \rangle = \norm{x}^2 \]
     Таким образом $\lambda_m x = 0$, откуда следует, что $x = 0$, то есть
     $H_m = E(\lambda_m, A)$, $A_m = \lambda_m I_m$, что и требовалось доказать.
 \end{proofbreak}
+
+\begin{corollaryth}
+    Каждый нормальный оператор допускает разложение
+    \[ A = \sum_{k=1}^m \lambda_k P_k, \]
+    где $P_k^* = P_k, \; k = \overline{1,m}$. При этом
+    \[ A^* = \sum_{k=1}^m \overline{\lambda_k} P_k \]
+    (следует из свойств сопряженных операторов)
+\end{corollaryth}
+
+\begin{theorem}
+    Пусть $A \in L(H)$ --- самосопряженный оператор в комплексном евклидовом
+    пространстве. Тогда его спектр состоит из вещественных собственных значений
+    и существует ортонормированный базис, составленный из собственных векторов
+    оператора $A$.
+\end{theorem}
+
+\begin{proof}
+    По следствию из теоремы \ref{th:normaldiagonalizable} оператор $A$
+    имеет допускает разложение
+    \[ A = \sum_{k=1}^m \lambda_k P_k \]
+    При этом
+    \[ A^* = \sum_{k=1}^m \overline{\lambda_k} P_k \]
+    Так как $A = A^*$ получаем
+    \[ \sum_{k=1}^m (\lambda_k - \overline{\lambda_k}) P_k = O \]
+    Применим к обеим частям равенства оператор $P_j, \; j = \overline{1,m}$:
+    \[ P_j \bigg( \sum_{k=1}^m (\lambda_k - \overline{\lambda_k}) P_k \bigg) = O
+    \]
+    Отсюда получаем
+    \[ (\lambda_j - \overline{\lambda_j}) P_j = O \Rightarrow \lambda_j =
+    \overline{\lambda_j} \]
+    То есть $\lambda_j \in \fieldr$.
+
+    Теперь, чтобы получить ортонормированный базис, рассмотрим разложение $H$ в
+    ортогональную прямую сумму
+    \[ H = E(\lambda_1, A) \oplus \dotsb \oplus E(\lambda_m, A) \]
+    и выберем в каждом собственном подпространстве ортонормированный базис. Их
+    объединение и будет ортонормированным базисом в $H$.
+\end{proof}
+
+\begin{theorem}
+    Пусть $U \in L(H)$ --- унитарный оператор. Тогда его спектр лежит на
+    единичной окружности, т. е. \[\absv{\lambda_j} = 1, \; \forall \lambda_j \in
+    \spectrum{U},\] и существует ортонормированный базис, состоящий из
+    собственных векторов оператора $U$.
+\end{theorem}
+
+\begin{proof}
+    Пусть $U \in L(H)$ --- унитарный, то есть $U^* = U^{-1}$. Тогда
+    \[ U = \sum_{k=1}^m \lambda_k P_k \]
+    и
+    \[ U^{-1} = \sum_{k=1} \frac{1}{\lambda_k} P_k = U^* \]
+    Аналогично случаю самосопряженного оператора можно показать, что
+    \[ \frac{1}{\lambda_k} = \overline{\lambda_k} \]
+    а это значит, что
+    \[ \lambda_k \overline{\lambda_k} = 1 \Rightarrow \absv{\lambda_k} = 1 \]
+
+    Утверждение о базисе доказывается аналогично предыдущей теореме.
+\end{proof}
+
+\begin{definition}
+    Матрица $\mathcal{A}$ называется \emph{нормальной}, если 
+    \[\mathcal{A} \mathcal{A}^* = \mathcal{A}^*\! \mathcal{A} \]
+\end{definition}
+
+\begin{definition}
+    Матрица $\mathcal{A}$ называется \emph{ортогональной}, если 
+    \[\mathcal{A} \mathcal{A}^* = \mathcal{A}^*\! \mathcal{A} = E \]
+\end{definition}
