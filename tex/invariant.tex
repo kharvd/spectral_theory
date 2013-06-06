@@ -42,7 +42,41 @@ $A_M$ или $A \vert M $.
     \end{gather*}
 \end{example}
 
-TODO: свойства матриц
+\begin{lemma}
+    Если $M$ --- нетривиальное инвариантное подпространство для $A \in L(X)$,
+    $\dim M = k < n$ то существует такой базис в $X$, что матрица $\mathcal{A} = (a_{ij})$ оператора
+    $A$ имеет в нём вид
+    \[ \mathcal{A} =  
+        \begin{pmatrix}
+            a_{11} & \ldots & a_{1k} & a_{1,k+1}   & \ldots & a_{1n} \\
+            \vdots & \ddots & \vdots & \vdots      & \vdots & \vdots \\
+            a_{k1} & \ldots & a_{kk} & a_{k,k+1}   & \ldots & a_{kn} \\
+            0      & \ldots & 0      & a_{k+1,k+1} & \ldots & a_{k+1,n} \\
+            \vdots & \vdots & \vdots & \vdots      & \ddots & \vdots \\
+            0      & \ldots & 0      & a_{n,k+1}   & \ldots & a_{nn}
+        \end{pmatrix}
+    \]
+\end{lemma}
+
+\begin{lemma}
+    Пусть $A \in L(X)$, $X = X_1 \oplus X_2$, $\dim X_1 = k$, $\dim X_2 = n-k$, $X_1, X_2$ --- инвариантны
+    относительно $A$. Тогда существует такой базис в $X$, что матрица оператора
+    имеет вид
+    \[ \mathcal{A} =
+        \begin{pmatrix}
+            \mathcal{A}_{11} & 0 \\
+            0                & \mathcal{A}_{22}
+        \end{pmatrix}
+    \] где $\mathcal{A}_{11} \in \matr{k}$, $\mathcal{A}_{22} \in \matr{n-k}$.
+\end{lemma}
+
+\begin{theorem}\label{th:blockmatrixpoly}
+    Если $\mathcal{A}$ --- блочная верхнетреугольная матрица, то
+    \[ \det \mathcal{A} = \prod_{k=1}^m \det \mathcal{A}_{kk} \]
+
+    Кроме того
+    \[ p_\mathcal{A}(\lambda) = \prod_{i=1}^m p_{\mathcal{A}_{ii}}(\lambda) \]
+\end{theorem}
 
 \begin{definition}
     Пусть $X = X_1 \oplus \dotsb \oplus X_m$ — прямая сумма инвариантных
