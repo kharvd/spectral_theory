@@ -1,3 +1,4 @@
+%By Hendrik Vogt http://tex.stackexchange.com/users/1235/hendrik-vogt
 \ProvidesPackage{widebar}
 \makeatletter
 \newcommand*\if@single[3]{%
@@ -31,8 +32,6 @@
     \advance\dimen@-\@tempdima
 %Now \dimen@ = (italic correction / 3) - (Breite / 10)
     \ifdim\dimen@>\z@ \dimen@0pt\fi
-%By Hendrik Vogt http://tex.stackexchange.com/users/1235/hendrik-vogt
-
 %The bar will be shortened in the case \dimen@<0 !
     \rel@kern{0.6}\kern-\dimen@
     \if#31
