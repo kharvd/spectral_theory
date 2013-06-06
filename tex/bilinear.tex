@@ -1,0 +1,141 @@
+\section{Билинейные и квадратичные формы}
+Далее рассматриваются билинейные и квадратичные формы на вещественном евклидовом
+пространстве $H$.
+
+\begin{definition}
+    Пусть $e_1, \dotsc, e_n$ --- базис в $H$, $\phi$ --- билинейная форма.
+    Матрица $(a_{ij}) \in \matr{}$, где $a_{ij} = \phi(e_i, e_j), \; i, j =
+    \overline{1, n}$ называется \emph{матрицей билинейной формы}.
+\end{definition}
+
+\begin{theorem}\label{th:bilinearformop}
+    Для каждой \,билинейной формы \, $\phi$ найдётся такой оператор $A \in L(H)$, что
+    \begin{equation}\label{eq:bilinearformop}
+        \forall x, y \in H \;\; \phi(x, y) = \langle Ax, y\rangle 
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    Пусть $e_1, \dotsc, e_n$ --- ортонормированный базис в $H$, $\mathcal{A} =
+    (a_{ij}) = (\phi(e_i, e_j))$ --- матрица билинейной формы.
+
+    Рассмотрим оператор, задаваемый матрицей $\mathcal{A}^\top = (a_{ji})$. Он
+    задаёт некоторую билинейную форму $f: H^2 \to \fieldr$:
+    \[ f(x, y) = \langle Ax, y\rangle \]
+
+    Покажем, что $\phi = f$. 
+    \[ f(e_i, e_j) = \langle Ae_i, e_j\rangle = a_{ij} = \phi(e_i, e_j) \]
+    $\big(\langle Ae_i, e_j\rangle\big)$ --- транспонированная матрица оператора $A$
+\end{proof}
+
+\begin{corollaryth}
+    Каждая билинейная форма в $\fieldr^n$ имеет вид
+    \[ \phi(x,y) = \sum_{i,j = 1}^n a_{ij} x_i y_j \]
+\end{corollaryth}
+
+\begin{corollaryth}
+    Билинейная форма \eqref{eq:bilinearformop} симметрична тогда и только тогда,
+    когда $A$ самосопряжен.
+\end{corollaryth}
+
+\begin{definition}
+    Функция $f: H \to \fieldr$ называется \emph{квадратичной формой}, если она может
+    быть представлена в виде
+    \[ f(x) = \phi(x, x), \]
+    где $\phi$ --- билинейная форма.
+\end{definition}
+
+Заданной квадратичной форме $f$ может соответствовать бесконечно много
+билинейных форм $\phi: H^2 \to \fieldr$ со свойством 
+\[ f(x) = \phi(x, x) \quad \forall x \in H \]
+
+Однако если $\phi$ --- симметрическая билинейная форма, то из равенства
+\[ \phi(x + y, x+y) = \phi(x, x) + 2\phi(x, y) + \phi(y, y) \]
+следует, что
+\[ \phi(x, y) = \frac{1}{2} (f(x+y) - f(x) - f(y)) \]
+
+Таким образом для данной квадратичной формы $f$ существует единственная
+симметрическая билинейная форма $\phi$, для которой $f(x) = \phi(x, x)$. Такая
+билинейная форма $\phi$ называется \emph{полярной} к квадратичной форме $f$.
+
+\begin{definition}
+    \emph{Матрицей квадратичной формы} называется матрица соответствующей ей полярной
+    билинейной формы.
+\end{definition}
+
+Из определения полярной билинейной формы и теоремы \ref{th:bilinearformop}
+следует
+
+\begin{theorem}
+    Каждая квадратичная форма $f$ может быть единственным образом представлена в
+    виде
+    \[ f(x) = \langle Ax, x\rangle, \]
+    где $A$ --- самосопряженный оператор из $L(H)$.
+\end{theorem}
+
+\begin{definition}
+    Квадратичная форма $f: H \to \fieldr$ называется \emph{положительно
+    определённой}
+    (\emph{положительно полуопределённой}), если для любого ненулевого $x \in H$
+    \[ f(x) > 0 \quad (f(x) \geq 0) \]
+\end{definition}
+
+Из определений вытекает, что \emph{квадратичная форма положительно определена
+тогда и
+только тогда, когда соответствующий ей оператор $A$ положительно определён.}
+
+\begin{definition}
+    Базис $e_1, \dotsc, e_n$ в $H$ называется \emph{каноническим} для квадратичной
+    формы $f : H \to \fieldr$, если в этом базисе она имеет вид
+    \[ f(x) = \sum_{i=1}^n \lambda_i x_i^2, \quad x = \sum_{j=1}^n x_j e_j, \;
+    \lambda_1, \dotsc, \lambda_k \in \fieldr \]
+
+    Коэффициенты $\lambda_k$ называются \emph{каноническими коэффициентами}
+    квадратичной формы.
+\end{definition}
+
+\begin{theorem}
+    Для каждой квадратичной формы существует канонический базис.
+\end{theorem}
+
+\begin{proof}
+    Квадратичная форма $f : H \to \fieldr$ представима в виде
+    \[ f(x) = \langle Ax, x\rangle, \]
+    где $A^* = A$. Согласно теореме \ref{th:selfadjointspectrum}, в $H$ существует
+    ортонормированный базис, состоящий из собственных векторов оператора $A$.
+    \[ Ae_k = \lambda_k e_k, \quad k = \overline{1,n} \]
+
+    Раскладывая вектор $x\in H$ по этому базису получаем:
+    \[ f(x) = \langle \sum_{k=1}^n x_k \lambda_k e_k, \sum_{j=1}^n x_j
+    e_j\rangle = \sum_{k=1}^n \lambda_k x_k^2 \]
+\end{proof}
+
+\begin{remark}
+    Пусть $f: H \to \fieldr$ --- квадратичная форма. Используя обозначения из
+    доказательства предыдущей теоремы, рассмотрим базис $e_1', \dotsc, e_k'$
+    такой, что
+    \[ e_k' = 
+        \begin{cases}
+            e_k, & \lambda_k = 0 \\[0.3em]
+            \dfrac{e_k}{\sqrt{\absv{\lambda_k}}}, & \lambda_k \neq 0
+    \end{cases} \quad\quad k = \overline{1,n} \]
+
+    Тогда
+    \[ f(x) = \langle Ax, x\rangle = \sum_{i=1}^n \lambda_i x_i^2 \norm{e_i}^2
+    \]
+
+    Получаем, что
+    \[ \lambda_i\norm{e_i}^2 =
+        \begin{cases}
+            0, & \lambda_i = 0 \\
+            \sgn \lambda_i, & \lambda_i \neq 0
+    \end{cases} \]
+    
+    Переставляя элементы базиса, без ограничения общности, можно считать, что
+    $\lambda_{m+1} = \dotsb = \lambda_{n} = 0$, $\lambda_1, \dotsc, \lambda_p >
+    0$, $\lambda_{p+1}, \dotsc, \lambda_m < 0$. Тогда в выбранном базисе
+    квадратичная форма будет иметь вид
+    \[ f(x) = x_1^2 + \dotsb + x_p^2 - x_{p+1}^2 - \dotsb - x_m^2 \]
+
+    Такое представление называется \emph{нормальным видом} квадратичной формы.
+\end{remark}

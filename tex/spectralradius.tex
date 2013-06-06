@@ -1,0 +1,164 @@
+\section{Спектральный радиус и норма операторов}
+Продолжим изучать линейные операторы в евклидовом пространстве.
+
+\begin{definition}
+    Спектральным радиусом оператора $A\in L(H)$ 
+    называется число $r(A)$, определённое равенством
+    \[ r(A) = \max_{\lambda \in \spectrum{A}} \absv{\lambda} \]
+\end{definition}
+
+Напомним определение нормы оператора:
+\[ \norm{A} = \max_{\norm{x} \leq 1} \norm{Ax} \]
+
+\begin{lemma}\label{le:radiusapprox}
+    Для любого оператора $A \in L(X)$ ($X$ --- конечномерное нормированное
+    пространство) имеет место оценка
+    \[ r(A) \leq \norm{A} \]
+\end{lemma}
+
+\begin{proof}
+    Пусть $\lambda_0 \in \spectrum{A}$ --- минимальное по модулю собственное
+    значение оператора $A$, $x_0$ --- отвечающий ему собственный вектор, такой
+    что $\norm{x_0} = 1$. Тогда
+    \[ r(A) = \absv{\lambda_0} = \absv{\lambda_0} \norm{x_0} = \norm{Ax_0} \leq
+    \max_{\norm{x} \leq 1} \norm{Ax} = \norm{A} \]
+\end{proof}
+
+\begin{theorem}\label{th:normalradius}
+    Пусть $A \in L(H)$ --- нормальный оператор. Тогда
+    \[ r(A) = \norm{A} \]
+\end{theorem}
+
+\begin{proof}
+    Пусть $e_1, \dotsc, e_n$ --- ортонормированный базис из собственных
+    векторов:
+    \[ Ae_k = \lambda_k e_k, \; k = \overline{1,n}\]
+
+    Разложим произвольный вектор $x$ по этому базису:
+    \begin{align*}
+        x &= \sum_{k=1}^n \langle x, e_k\rangle e_k \\
+        Ax &= \sum_{k=1}^n \lambda_k \langle x, e_k\rangle e_k 
+    \end{align*}
+
+    Оценим величину $\norm{Ax}^2$:
+    \begin{multline*}
+        \norm{Ax}^2 = \norm{\sum_{k=1}^n \lambda_k \langle x, e_k\rangle e_k} =
+        \sum_{k=1}^n \absv{\lambda_k}^2 \absv{\langle x, e_k\rangle}^2 \leq \\ \leq
+        r(A)^2 \sum_{k=1}^n \absv{\langle x, e_k\rangle}^2 = r(A)^2 \norm{x}^2.
+    \end{multline*}
+
+    Таким образом
+    \[ \norm{Ax}^2 \leq r(A)^2 \norm{x}^2 \]
+
+    Пусть $\norm{x} \leq 1$. Тогда $\forall x \in H\; \norm{x} \leq 1 \Rightarrow \norm{Ax}^2 \leq r(A)^2$.
+    \[ \norm{A}^2 = \max_{\norm{x} \leq 1}\norm{Ax}^2 \leq r(A)^2 \]
+
+    То есть $\norm{A} \leq r(A)$ и при этом из леммы \ref{le:radiusapprox}
+    получаем, что $\norm{A} \geq r(A)$. Значит
+    \[ \norm{A} = r(A) \]
+\end{proof}
+
+\begin{corollaryth}
+    Если $A \in L(H)$ --- нормальный оператор и 
+    \[\langle Ax, x\rangle = 0 \quad \forall x \in H, \] то $A = O$.
+\end{corollaryth}
+
+\begin{proof}
+    Пусть $\lambda_0 \in \spectrum{A}$, $x_0$ --- соответствующий собственный
+    вектор. Тогда
+    \[ \langle Ax_0, x_0 \rangle = \lambda_0 \norm{x_0}^2 = 0 \Rightarrow
+    \lambda_0 = 0 \]
+    
+    Так как $A$ --- нормальный, $0 = r(A) = \norm{A}$, то $A = O$.
+\end{proof}
+
+\begin{definition}
+    Самосопряженный оператор $A \in L(H)$ называется \emph{положительно
+    определённым} (\emph{положительно полуопределённым}), если 
+    \[\langle Ax, x\rangle > 0 \quad (\langle Ax, x\rangle \geq 0)\] 
+    для всех ненулевых $x \in H$.
+
+    Самосопряженный оператор $A \in L(H)$ называется \emph{отрицательно
+    определённым} (\emph{отрицательно полуопределённым}), если 
+    \[\langle Ax, x\rangle < 0 \quad (\langle Ax, x\rangle \leq 0)\] 
+    для всех ненулевых $x \in H$.
+\end{definition}
+
+\begin{definition}
+    Самосопряженная \, матрица \, называется \emph{положительно определённой}
+    (\emph{положительно полуопределённой}), если соответствующий ей оператор положительно определён
+    (положительно полуопределён).
+
+    Самосопряженная матрица называется \emph{отрицательно определённой}
+    (\emph{отрицательно полуопределённой}), если соответствующий ей оператор
+    отрицательно определён
+    (отрицательно полуопределён).
+\end{definition}
+
+\begin{theorem}
+    Самосопряженный оператор $A \in L(H)$ положительно определён (полуопределён)
+    тогда и только тогда когда все его собственные значения положительны
+    (неотрицательны).
+\end{theorem}
+
+\begin{proofbreak}
+    \dindent \textbf{Необходимость}
+
+    Пусть $A$ положительно определён. Возьмём некоторый собственный вектор $x_0$
+    и соответствующее ему собственное значение $\lambda_0$:
+    \[ 0 < \langle Ax_0, x_0 \rangle = \lambda_0 \norm{x_0}^2 \Rightarrow
+    \lambda_0 > 0 \]
+
+    \textbf{Достаточность}
+
+    Пусть все собственные значения $\lambda_i, \; i = \overline{1,n}$
+    положительны и $e_1, \dotsc, e_n$ --- ортонормированный базис из собственных
+    векторов. Тогда если $x \neq 0$:
+    \[ \langle Ax, x\rangle = \langle \sum_{k=1}^n \lambda_k \langle
+        x, e_k\rangle e_k, \sum_{j=1}^n \langle x, e_j\rangle e_j \rangle =
+    \sum_{k=1}^n \lambda_k \absv{\langle x, e_k\rangle}^2 > 0 \]
+
+    Аналогично в случае полуопределённости оператора и неотрицательности
+    собственных значений.
+\end{proofbreak}
+
+\begin{theorem}
+    Пусть $H$ --- комплексное евклидово пространство. Оператор $A\in L(H)$
+    самосопряжен тогда и только тогда, когда
+    \[ \forall x \in H \;\; \langle Ax, x\rangle \in \fieldr \]
+\end{theorem}
+
+\begin{proofbreak}
+    \dindent \textbf{Необходимость} 
+    \[ \langle Ax, x\rangle = \langle x, Ax\rangle = \overline{\langle
+    Ax, x\rangle} \Rightarrow \langle Ax, x\rangle \in \fieldr \]
+
+    \textbf{Достаточность}
+
+    Пусть для всех $x \in H$ выполняется условие
+    \[ \langle Ax, x\rangle \in \fieldr \]
+
+    Тогда
+    \[ \langle Ax, x\rangle = \overline{\langle Ax, x\rangle} =
+    \overline{\langle x, A^*x\rangle} = \langle A^*x, x\rangle \]
+
+    Следовательно
+    \[ \langle (A - A^*)x, x\rangle = 0 \quad \forall x \in H \]
+
+    Оператор $A - A^*$ --- антисамосопряженный, а значит нормальный, поэтому 
+    согласно следствию 1 из теоремы \ref{th:normalradius} получаем, что
+    \[ A - A^* = O \Rightarrow A = A^* \]
+\end{proofbreak}
+
+\begin{theorem}[критерий Сильвестра]\label{th:sylvestercriterion}
+    Пусть $A\in L(H)$ --- самосопряженный оператор, $\mathcal{A} = (a_{ij}) \in
+    \matr{m}$ --- его матрица в некотором ортонормированном базисе из $H$. Тогда
+    для того чтобы оператор $A$ был положительно определённым, необходимо и
+    достаточно чтобы выполнялись неравенства:
+    \[ a_{11} = \det \mathcal{A}_1 > 0, \; \det \mathcal{A}_2 = \begin{vmatrix}
+            a_{11} & a_{12}\\
+            a_{21} & a_{22}
+    \end{vmatrix} > 0, \dotsc, \det \mathcal{A}_m = \det \mathcal{A} > 0 \]
+    для главных миноров $\mathcal{A}_k, \; k = \overline{1, m}$ матрицы
+    $\mathcal{A}$.
+\end{theorem}
